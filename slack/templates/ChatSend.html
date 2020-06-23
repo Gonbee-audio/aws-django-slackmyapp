@@ -12,23 +12,27 @@
 <body>
     <div id="app">
         <div class="text-center">
-        <transition name="fade" >
-        <div v-if="Pagenation" >
+        <transition name="custom-classes-transition"
+                    mode="out-in"
+                    enter-active-class="animated bounceInDown"
+                    leave-active-class="animated fadeOutUpBig" >
+        <div key="Page1" v-if="Pagenation" >
             {% if error %}{{ error }}{% endif %}
                 <a>Please enter the text</a>
                 <a>{% if user.is_authenticated %}</a>
                 <form method="POST" enctype="multipart/form-data">{% csrf_token %}
                     <input type="hidden" name="username" value="{{ user.username }}">
                     <textarea name="text" cols="100" rows="10"></textarea><br>
-                    <input type="file" name="image">
-                    <input type="submit">
+                    <p>picture: <input type="file" name="image"></p>
+                    <input type="button" value="coution" class="alert alert-light" role="alert" @click="ChangePagenation">
+                    <input type="submit" value="Send">
                 </form>
-            <input type="button" value="coution" class="alert alert-light" role="alert" @click="ChangePagenation">
+            
             {% else %}
                 <p>ログインしていません</p>
             {% endif %}
         </div>
-        <div v-else class="CoutionMessage">
+        <div key="page2" v-else class="CoutionMessage">
            <p>利用規約</p>
            <p>これはポートフォリオなので不定期に投稿を削除することがあります。
            ご了承ください。</p>
@@ -43,7 +47,6 @@
 {% endblock %}
 
 {% block links %}
-  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 
 <script>
   var app = new Vue({

@@ -18,13 +18,13 @@
                 position: absolute;
                 top:0%;
                 padding: 40% 25% 20% 0;
-
             }
             .IconPosition{
                 z-index: 9999;
                 position: fixed;
                 top: 10px;
                 left: 0px;
+                
             }
         </style>
 
@@ -34,20 +34,23 @@
     <body>
         {% if user.is_authenticated %}
         <div id="menu">
+            <input type="button" value="Menu" class="btn btn-primary" style="position: relative;" role="alert" @click="OpenMenupage">
                 <transition name="custom-classes-transition"
                             enter-active-class="animated slideInLeft"
                             leave-active-class="animated slideOutLeft">
                     <div key="hidden" v-if="MenuPage" >
-                        <input type="button" value="Menu" class="btn btn-primary" style="position: absolute;" role="alert" @click="OpenMenupage">
+                        
                     </div>
                     <div key="show"v-else class="MenuCatalog">
                         <div class="IconPosition">
                             <div class="list-group">
                                 <h2>Home Menu</h2>
-                                <a class="list-group-item list-group-item-action active" @click="OpenMenupage">Menu</a>
+                                <p>{{ user.get_username }}でログイン中</p>
+                                <a class="list-group-item list-group-item-action active" @click="OpenMenupage">Back</a>
                                 <a href="../Chat" class="list-group-item list-group-item-action">ChatRoom</a>
                                 <a href="../ChatSend/" class="list-group-item list-group-item-action">ChatSend</a>
                                 <a href="{% url 'logout' %}" class="list-group-item list-group-item-action">Logout</a>
+                                <a>{{ username }}</a>
                             </div>
                         </div>
                     </div>
@@ -58,10 +61,13 @@
     </body>
 
 
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
     {% block links %}{% endblock %}
 
 
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script>
         var app = new Vue({
     el: '#menu',

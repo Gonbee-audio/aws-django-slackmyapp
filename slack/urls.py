@@ -1,5 +1,5 @@
 from django.urls import path
-from slack.views import SingUpAccount, Login, ChatModel, SendChatMessage, Logout, DeleteView, Good
+from slack.views import SingUpAccount, Login, ChatModel, SendChatMessage, Logout, DeleteView, Good, LoginUser
 
 urlpatterns = [
     path('SignUp/', SingUpAccount, name="signup"),
@@ -8,5 +8,6 @@ urlpatterns = [
     path('ChatSend/', SendChatMessage, name="sendchatmessage"),
     path('Logout/', Logout, name="logout"),
     path('Chat/<int:pk>/Delete', DeleteView, name="delete"),
-    path('Chat/<int:pk>/Good', Good, name="good")
+    path('Chat/<int:pk>/Good', Good, name="good"),
+    path('Loginuser/', LoginUser, name="loginuser")
 ]

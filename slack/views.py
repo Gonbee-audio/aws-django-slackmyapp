@@ -68,5 +68,11 @@ def Good(request,pk):
     post.good = post.good + 1
     post.save()
     return redirect('chat')
-    
+
+def LoginUser(request):
+    username = None
+    if request.user.is_authenticated():
+       username = request.user
+       context = {'username': username}
+       return render(request ,'base.html', context)
 
