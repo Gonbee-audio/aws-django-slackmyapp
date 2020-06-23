@@ -1,0 +1,27 @@
+version: '3'
+services:
+  web:
+    container_name: django_slack
+    build: .
+    working_dir: /code
+    command: python3 manage.py runserver 0.0.0.0:8000
+    ports:
+      -  8000:8000
+    volumes:
+      -  .:/code
+    depends_on:
+      - db
+
+  db:
+    container_name: postgreSQL
+    image: postgres:10.13
+    restart: always
+    environment:
+      POSTGRESQL_DATABASE: docker
+      POSTGRESQL_USER: root
+      POSTGRESQL_PASSWORD: password
+      POSTGRESQL_ALLOW_EMPTY_PASSWORD: ‘yes’
+    volumes:
+      - ./postgresql:/var/lib/psql
+    ports:
+      -  33306:3306
