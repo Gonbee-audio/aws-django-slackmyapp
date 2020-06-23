@@ -28,7 +28,7 @@ def Login(request):
         LoginUserInformation = authenticate(username=LoginUsername, password=LoginPassword)
         if LoginUserInformation is not None:
             login(request, LoginUserInformation)
-            return render('Login.html', {'success':'you create your new account!!'})
+            return redirect('chat')
         else:
             return render(request, 'Login.html', {})
     return render(request, 'Login.html', {})
